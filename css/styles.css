@@ -1,0 +1,42 @@
+.card-rounded {
+  border-radius: 70px;
+  border: 4px solid #fff !important;
+}
+.card {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.card-rounded:hover {
+  transform: scale(1.05);
+  
+}
+
+.card-img-top {
+  filter: drop-shadow(-4px 4px 25px rgba(0, 0, 0, 0.7));
+}
+.ocultar {
+  display: none !important;
+}
+
+.vs {
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  background-color: blueviolet;
+  position: relative;
+  top: -385px;
+  left: 47vw;
+  border: yellow 2px solid;
+  box-shadow:0px 0px 30px 18px  rgba(0,0,0,0.75); 
+  
+}
+
+#cardsE1 {
+    background-image: url('images/cancha.png') !important;
+}
+
+.cancha{min-height:700px; padding-top:100px;background-image: url('./images/cancha.png') !important ;background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important; 
+}

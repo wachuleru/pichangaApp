@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PichangaAPP</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+    />
+    <script>
+      let mode='Seleccionar';
+      let Alljugadores = [
+      /* {
+        Jugador: "Arturo Zapata",
+        Puntaje:8.5,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Patricio Marin",
+        Puntaje:7.2,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Alexis Marin",
+        Puntaje:8.5,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Emilio Sepulveda",
+        Puntaje:5.7,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Miguel Godoy",
+        Puntaje:5.5,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Cristian Rios T",
+        Puntaje:6.3,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Alejandro Llancafil",
+        Puntaje:4.3,
+        Especialidad: "ARQ",
+        activo: false,
+      },
+      {
+        Jugador: "Ruben Rios",
+        Puntaje:7.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Ruben Sepulveda",
+        Puntaje:7,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Hector Ramirez",
+        Puntaje:3,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Cristian Rios",
+        Puntaje:4.6,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Javier Abarzua",
+        Puntaje:5.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Alvaro Verdugo",
+        Puntaje:4.4,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Carlos Tapia",
+        Puntaje:8.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Milton Lagos",
+        Puntaje:9.7,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Matias Vasquez",
+        Puntaje:7.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Jaime Vasquez",
+        Puntaje:6.3,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Nelson Zambrano",
+        Puntaje:4.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Oscar Llanquitruf",
+        Puntaje:8.9,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Pablo Garcia",
+        Puntaje:4,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Ricardo Lagos",
+        Puntaje:7,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Reinaldo Redel",
+        Puntaje:7,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Marcos Epuñir",
+        Puntaje:6.2,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Pablo Sepulveda",
+        Puntaje:5.6,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Bastian Rios",
+        Puntaje:8.3,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Papa Yayi Muñoz",
+        Puntaje:5.5,
+        Especialidad: "ARQ",
+        activo: false,
+      },
+      {
+        Jugador: "Nicolas Paty",
+        Puntaje:8.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Moises Millan",
+        Puntaje:7.5,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Javier Olate",
+        Puntaje:8.1,
+        Especialidad: "ARQ",
+        activo: false,
+      },
+      {
+        Jugador: "Felipe Zambrano",
+        Puntaje:8.8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Danny Chanchi",
+        Puntaje:8.9,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Nelson Lepiqueo",
+        Puntaje:6.3,
+        Especialidad: "DEF",
+        activo: false,
+      } */
+      ];
+      if (typeof(Storage) !== "undefined") {
+        let data= localStorage.getItem("jugadoresSimple");
+        console.log('data',data)
+        if(data){
+          
+          Alljugadores=JSON.parse(data);
+          Alljugadores.map(j=> j.activo=false)
+        }
+      } else {
+       
+      }
+      
+      
+      function saveAll(){
+        localStorage.setItem("jugadoresSimple", JSON.stringify(Alljugadores));
+        console.log('guardad0',localStorage.getItem("jugadoresSimple"))
+      }
+     /* {
+        Jugador: "Arturo Zapata",
+        Velocidad: 8,
+        Regate: 9.75,
+        Disparo: 7.25,
+        Defensa: 8,
+        Ataque: 8.75,
+        Resistencia: 8.5,
+        Motivacion: 9,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Patricio Marin",
+        Velocidad: 7,
+        Regate: 7,
+        Disparo: 8.5,
+        Defensa: 6.5,
+        Ataque: 7.5,
+        Resistencia: 7,
+        Motivacion: 7,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Alexis Marin",
+        Velocidad: 6,
+        Regate: 7.5,
+        Disparo: 8,
+        Defensa: 6,
+        Ataque: 7,
+        Resistencia: 6,
+        Motivacion: 7,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Emilio Sepulveda",
+        Velocidad: 5.75,
+        Regate: 5,
+        Disparo: 5,
+        Defensa: 6,
+        Ataque: 5,
+        Resistencia: 5.75,
+        Motivacion: 7.75,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Miguel Godoy",
+        Velocidad: 5.75,
+        Regate: 5,
+        Disparo: 4,
+        Defensa: 6,
+        Ataque: 4.5,
+        Resistencia: 5.75,
+        Motivacion: 7.75,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Cristian Rios T",
+        Velocidad: 6,
+        Regate: 5,
+        Disparo: 7,
+        Defensa: 5,
+        Ataque: 7,
+        Resistencia: 7,
+        Motivacion: 7,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Alejandro Llancafil",
+        Velocidad: 2.25,
+        Regate: 2,
+        Disparo: 2.75,
+        Defensa: 8.25,
+        Ataque: 2,
+        Resistencia: 5,
+        Motivacion: 5,
+        Especialidad: "ARQ",
+        activo: false,
+      },
+      {
+        Jugador: "Ruben Rios",
+        Velocidad: 9,
+        Regate: 9.5,
+        Disparo: 6.75,
+        Defensa: 5.25,
+        Ataque: 8,
+        Resistencia: 10,
+        Motivacion: 6.5,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Ruben Sepulveda",
+        Velocidad: 6,
+        Regate: 7.75,
+        Disparo: 7,
+        Defensa: 6.75,
+        Ataque: 6.5,
+        Resistencia: 7,
+        Motivacion: 8.5,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Hector Ramirez",
+        Velocidad: 1,
+        Regate: 2,
+        Disparo: 6,
+        Defensa: 1.75,
+        Ataque: 2.75,
+        Resistencia: 1,
+        Motivacion: 10,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Cristian Rios",
+        Velocidad: 3.75,
+        Regate: 3,
+        Disparo: 4,
+        Defensa: 6,
+        Ataque: 4,
+        Resistencia: 4,
+        Motivacion: 7.5,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Javier Abarzua",
+        Velocidad: 4.5,
+        Regate: 6.25,
+        Disparo: 9.25,
+        Defensa: 3.75,
+        Ataque: 6.75,
+        Resistencia: 5,
+        Motivacion: 6.5,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Alvaro Verdugo",
+        Velocidad: 3.25,
+        Regate: 4,
+        Disparo: 3.5,
+        Defensa: 5,
+        Ataque: 3.75,
+        Resistencia: 5,
+        Motivacion: 6,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Carlos Tapia",
+        Velocidad: 10,
+        Regate: 8,
+        Disparo: 9,
+        Defensa: 10,
+        Ataque: 9,
+        Resistencia: 10,
+        Motivacion: 3.25,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Milton Lagos",
+        Velocidad: 10,
+        Regate: 10,
+        Disparo: 10,
+        Defensa: 9,
+        Ataque: 10,
+        Resistencia: 10,
+        Motivacion: 9,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Matias Vasquez",
+        Velocidad: 8,
+        Regate: 8,
+        Disparo: 9,
+        Defensa: 7,
+        Ataque: 8,
+        Resistencia: 8,
+        Motivacion: 7,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Jaime Vasquez",
+        Velocidad: 5,
+        Regate: 7.75,
+        Disparo: 7,
+        Defensa: 7,
+        Ataque: 5.75,
+        Resistencia: 5,
+        Motivacion: 8,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Nelson Zambrano",
+        Velocidad: 3,
+        Regate: 3,
+        Disparo: 5,
+        Defensa: 4,
+        Ataque: 5,
+        Resistencia: 5.25,
+        Motivacion: 8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Oscar Llanquitruf",
+        Velocidad: 7.75,
+        Regate: 8.5,
+        Disparo: 7,
+        Defensa: 10,
+        Ataque: 8.75,
+        Resistencia: 9.75,
+        Motivacion: 8.25,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Pablo Garcia",
+        Velocidad: 4.5,
+        Regate: 4,
+        Disparo: 4,
+        Defensa: 4.5,
+        Ataque: 4.5,
+        Resistencia: 5,
+        Motivacion: 6,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Ricardo Lagos",
+        Velocidad: 5,
+        Regate: 7,
+        Disparo: 5,
+        Defensa: 8,
+        Ataque: 7,
+        Resistencia: 6,
+        Motivacion: 5,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Reinaldo Redel",
+        Velocidad: 5,
+        Regate: 7,
+        Disparo: 5,
+        Defensa: 8,
+        Ataque: 6,
+        Resistencia: 6,
+        Motivacion: 5,
+        Especialidad: "DEF",
+        activo: false,
+      },
+      {
+        Jugador: "Marcos Epuñir",
+        Velocidad: 5,
+        Regate: 7,
+        Disparo: 6,
+        Defensa: 6,
+        Ataque: 6,
+        Resistencia: 6,
+        Motivacion: 8,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Pablo Sepulveda",
+        Velocidad: 5,
+        Regate: 6.5,
+        Disparo: 7,
+        Defensa: 5,
+        Ataque: 6.5,
+        Resistencia: 4,
+        Motivacion: 7,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Bastian Rios",
+        Velocidad: 9,
+        Regate: 9.5,
+        Disparo: 6.75,
+        Defensa: 7,
+        Ataque: 8,
+        Resistencia: 10,
+        Motivacion: 7.5,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Papa Yayi Muñoz",
+        Velocidad: 4,
+        Regate: 7,
+        Disparo: 5,
+        Defensa: 6,
+        Ataque: 5,
+        Resistencia: 6,
+        Motivacion: 5,
+        Especialidad: "ARQ",
+        activo: false,
+      },
+      {
+        Jugador: "Nicolas Paty",
+        Velocidad: 9,
+        Regate: 9,
+        Disparo: 10,
+        Defensa: 8,
+        Ataque: 9,
+        Resistencia: 10,
+        Motivacion: 7,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Moises Millan",
+        Velocidad: 6.25,
+        Regate: 6.75,
+        Disparo: 8.25,
+        Defensa: 4.25,
+        Ataque: 6.25,
+        Resistencia: 6.5,
+        Motivacion: 5.5,
+        Especialidad: "*",
+        activo: false,
+      },
+      {
+        Jugador: "Javier Olate",
+        Velocidad: 6.5,
+        Regate: 8,
+        Disparo: 8,
+        Defensa: 10,
+        Ataque: 8,
+        Resistencia: 7,
+        Motivacion: 8,
+        Especialidad: "ARQ",
+        activo: false,
+      },
+      {
+        Jugador: "Felipe Zambrano",
+        Velocidad: 7.75,
+        Regate: 8.5,
+        Disparo: 7,
+        Defensa: 10,
+        Ataque: 8.75,
+        Resistencia: 9.75,
+        Motivacion: 8.25,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Danny Chanchi",
+        Velocidad: 7.75,
+        Regate: 8.5,
+        Disparo: 7,
+        Defensa: 10,
+        Ataque: 8.75,
+        Resistencia: 9.75,
+        Motivacion: 8.25,
+        Especialidad: "ATK",
+        activo: false,
+      },
+      {
+        Jugador: "Nelson Lepiqueo",
+        Velocidad: 6,
+        Regate: 6,
+        Disparo: 6,
+        Defensa: 6,
+        Ataque: 6,
+        Resistencia: 7,
+        Motivacion: 7,
+        Especialidad: "DEF",
+        activo: false,
+      },*/
+      var equipo1 = [];
+      var equipo2 = [];
+      var equipos = [];
+      
+      var jugadores = [];
+      let jugadoresEliminar=[];
+      function toogleJugador(name) {
+        if(mode=='Seleccionar'){
+          const jug = Alljugadores.find((j) => j.Jugador === name);
+          jug.activo = !jug.activo;
+          if (jug.activo) {
+            jugadores.push(jug);
+            console.log(jugadores);
+            let btn = document.getElementById("btn-" + name);
+            btn.classList.remove("btn-secondary");
+            btn.classList.add("btn-success");
+          } else {
+            const index = jugadores.findIndex((x) => x.Jugador === name);
+            jugadores.splice(index, 1);
+            console.log(jugadores);
+            let btn = document.getElementById("btn-" + name);
+            btn.classList.remove("btn-success");
+            btn.classList.add("btn-secondary");
+          }
+          let pill = document.getElementById("seleccionados");
+          pill.innerText = jugadores.length + "/" + Alljugadores.length;
+        }else if(mode=='Eliminar'){
+          let r =confirm('Está seguro de elminar a '+name+'?');
+          if(r){
+            Alljugadores= Alljugadores.filter( j => j.Jugador!=name);
+            jugadores= jugadores.filter( j => j.Jugador!=name);
+            console.log('jugadores',jugadores)
+            getJugadoresDisponibles();
+          }
+        }else if(mode=='Editar'){
+          editarJugador(name);
+        }
+          
+        
+      }
+
+      function getJugadoresDisponibles() {
+        //calcularPonderado();
+        console.log("getJugadoresDisponibles");
+        const listado = document.getElementById("jugadoresDisponibles");
+        var lista = "";
+        Alljugadores.forEach((e) => {
+
+          lista +=
+            "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-1 '><div class='d-grid gap-1 d-md-block' style='width:100% !important'><button style='width:100% !important' id='" +
+            "btn-" +
+            e.Jugador +
+            "' class='btn btn-" +
+            (e.activo ? "success active" : "secondary") +
+            "' onclick='toogleJugador(\"" +
+            e.Jugador +
+            "\")'>" +
+            e.Jugador+" "+(e.Especialidad=='ARQ'?'<i class="bi bi-door-closed"></i>':(e.Especialidad=='DEF'?'<i class="bi bi-shield-fill-check"></i>':(e.Especialidad=='ATK'?'<i class="bi bi-capslock-fill"></i>':(e.Especialidad=='*'?'<i class="bi bi-asterisk"></i>':''))))+
+            "</button></div></div>";
+        });
+        //console.log("lista",lista)
+        listado.innerHTML = lista;
+
+        let pill = document.getElementById("seleccionados");
+        pill.innerText = jugadores.length + "/" + Alljugadores.length;
+      }
+
+      function armar() {
+        // Arreglo de jugadores
+        let eq1 = [];
+        let eq2 = [];
+        let intentos = 0;
+        while (true) {
+          intentos = intentos + 1;
+          // Mezclamos el arreglo de jugadores aleatoriamente
+          jugadores.sort(() => Math.random() - 0.5);
+
+          // Armamos los equipos
+          const equipo1 = [];
+          const equipo2 = [];
+          let arqs=0;
+          let defs=0;
+          let atks=0;
+          let arqs1=0;
+          let defs1=0;
+          let atks1=0;
+          let arqs2=0;
+          let defs2=0;
+          let atks2=0;
+          for (let i = 0; i < jugadores.length; i++) {
+            jugadores[i].Posicion= jugadores[i].Especialidad=='ARQ'?1:2;
+            let arqse=0;
+            let defse=0;
+            let atkse=0;
+            if(jugadores[i].Especialidad=='ARQ'){
+              arqse=1;
+            }
+            if(jugadores[i].Especialidad=='DEF'){
+              defse=1;
+            }
+            if(jugadores[i].Especialidad=='ATK'){
+              atkse=1;
+            }
+            arqs=arqs+arqse
+            defs=defs+defse
+            atks=atks+atkse
+            if (i % 2 === 0) {
+              arqs1=arqs1+arqse
+              defs1=defs1+defse
+              atks1=atks1+atkse
+              equipo1.push(jugadores[i]);
+            } else {
+              arqs2=arqs2+arqse
+              defs2=defs2+defse
+              atks2=atks2+atkse
+              equipo2.push(jugadores[i]);
+            }
+          }
+
+          // Calculamos la diferencia de Puntajes
+          const diferencia = Math.abs(
+            equipo1.reduce((total, jugador) => total + jugador.Puntaje, 0) -
+              equipo2.reduce((total, jugador) => total + jugador.Puntaje, 0)
+          );
+
+          // Calculamos la suma de los Puntajes dividido en 2 a un 10%
+          const PuntajesTotales = jugadores.reduce(
+            (total, jugador) => total + jugador.Puntaje,
+            0
+          );
+          const umbral = (PuntajesTotales / 2) * 0.1;
+          let noequitativo=false;
+          console.log('rev arqs',arqs,'arqs1',arqs1,'arqs2',arqs2)
+          console.log('rev defs',defs,'defs1',defs1,'defs2',defs2)
+          console.log('rev atks',atks,'atks1',atks1,'atks2',atks2)
+            if(arqs>1 && (arqs1==0 || arqs2==0)){
+              noequitativo=true;
+            }else if(defs>1 && (defs1==0 || defs2==0) && noequitativo){
+              noequitativo=true;
+            }else if(atks>1 && (atks1==0 || atks2==0) && noequitativo){
+              noequitativo=true;
+            }
+            console.log('rev noequitativo',noequitativo)
+            console.log('rev diferencia > umbral',diferencia > umbral)
+          // Si la diferencia es mayor al umbral, volvemos a intentar formar equipos
+          if (diferencia > umbral || noequitativo) {
+            
+            console.log("rev intentos", intentos);
+            if (intentos < 100) {
+              continue;
+            }
+            
+          }
+          equipos = [];
+
+          equipos.push({
+            jugadores: [...equipo1],
+            PuntajePromedio: 0,
+            PuntajeTotal: 0,
+          });
+          equipos.push({
+            jugadores: [...equipo2],
+            PuntajePromedio: 0,
+            PuntajeTotal: 0,
+          });
+          calcularStats(0);
+          calcularStats(1);
+          /*
+                // Imprimimos los equipos y salimos del bucle
+                let PuntajeEquipo1=0;
+                let PuntajeProm1=0;
+                let Velocidad1=0;
+                let Regate1=0;
+                let Disparo1=0;
+                let Defensa1=0;
+                let Ataque1=0;
+                let Resistencia1=0;
+                let Motivacion1=0;
+                
+                let PuntajeEquipo2=0;
+                let PuntajeProm2=0;
+                let Velocidad2=0;
+                let Regate2=0;
+                let Disparo2=0;
+                let Defensa2=0;
+                let Ataque2=0;
+                let Resistencia2=0;
+                let Motivacion2=0;
+                console.log('Equipo 1:');
+                equipo1.forEach(jugador => {
+                    console.log(jugador.Jugador, jugador.Puntaje);
+                    PuntajeEquipo1 += jugador.Puntaje;
+                    Velocidad1+=jugador.Velocidad;
+                    Regate1+=jugador.Regate;
+                    Disparo1+=jugador.Disparo;
+                    Defensa1+=jugador.Defensa;
+                    Ataque1+=jugador.Ataque;
+                    Resistencia1+=jugador.Resistencia;
+                    Motivacion1+=jugador.Motivacion;                   
+                });
+                console.log(PuntajeProm1,Velocidad1,Regate1,Disparo1, Defensa1, Ataque1, Resistencia1, Motivacion1);
+                let equipo1Stats={
+                    "PuntajePromedio":Math.round((PuntajeEquipo1/equipo1.length)*10)/10,
+                    "Velocidad":Math.round((Velocidad1/equipo1.length)*10)/10,
+                    "Regate":Math.round((Regate1/equipo1.length)*10)/10,
+                    "Disparo":Math.round((Disparo1/equipo1.length)*10)/10,
+                    "Defensa":Math.round((Defensa1/equipo1.length)*10)/10,
+                    "Ataque":Math.round((Ataque1/equipo1.length)*10)/10,
+                    "Resistencia":Math.round((Resistencia1/equipo1.length)*10)/10,
+                    "Motivacion":Math.round((Motivacion1/equipo1.length)*10)/10,
+                    "Puntaje":PuntajeEquipo1
+                }
+                
+                PuntajeEquipo1= Math.round(PuntajeEquipo1*10)/10;
+                equipo1.sort((a,b)=>a.Puntaje-b.Puntaje)
+                console.log('Equipo 2:');
+                equipo2.forEach(jugador => {
+                    console.log(jugador.Jugador, jugador.Puntaje);
+                    PuntajeEquipo2 += jugador.Puntaje;                
+                    Velocidad2+=jugador.Velocidad;
+                    Regate2+=jugador.Regate;
+                    Disparo2+=jugador.Disparo;
+                    Defensa2+=jugador.Defensa;
+                    Ataque2+=jugador.Ataque;
+                    Resistencia2+=jugador.Resistencia;
+                    Motivacion2+=jugador.Motivacion;
+                });
+
+                let equipo2Stats={
+                    "PuntajePromedio":Math.round( (PuntajeEquipo2/equipo2.length)*10 )/10,
+                    "Velocidad":Math.round( (Velocidad2/equipo2.length)*10 )/10,
+                    "Regate":Math.round( (Regate2/equipo2.length)*10 )/10,
+                    "Disparo":Math.round( (Disparo2/equipo2.length)*10 )/10,
+                    "Defensa":Math.round( (Defensa2/equipo2.length)*10 )/10,
+                    "Ataque":Math.round( (Ataque2/equipo2.length)*10 )/10,
+                    "Resistencia":Math.round( (Resistencia2/equipo2.length)*10 )/10,
+                    "Motivacion":Math.round( (Motivacion2/equipo2.length)*10 )/10,
+                    "Puntaje":PuntajeEquipo2
+                }
+
+                PuntajeEquipo2= Math.round(PuntajeEquipo2*10)/10;
+                equipo2.sort((a,b)=>a.Puntaje-b.Puntaje)
+                
+                let e1=document.getElementById('equipo1');
+                let e2=document.getElementById('equipo2');
+                let e11=document.getElementById('equipo11');
+                let e22=document.getElementById('equipo22');
+
+                let tr1= "";
+                let tr2="";
+                let tr11= "";
+                let tr22="";
+
+                equipo1.forEach((e)=>{
+                    tr1+="<tr><td>"+e.Jugador+"</td><td>"+e.Puntaje+"</td></tr>"
+                    tr11+="<li class='list-group-item'>"+e.Jugador+"</li>"
+                })
+                tr1+="<tr><td><b>TOTAL</b></td><td><b>"+PuntajeEquipo1+"</b></td></tr>";
+                tr1+="<tr><td><b>Promedio</b></td><td><b>"+equipo1Stats.PuntajePromedio+"</b></td></tr>";
+                equipo2.forEach((e)=>{
+                    tr2+="<tr><td>"+e.Jugador+"</td><td>"+e.Puntaje+"</td></tr>"
+                    tr22+="<li class='list-group-item'>"+e.Jugador+"</li>"
+                })
+                tr2+="<tr><td><b>TOTAL</b></td><td><b>"+PuntajeEquipo2+"</b></td></tr>";
+                tr2+="<tr><td><b>Promedio</b></td><td><b>"+equipo2Stats.PuntajePromedio+"</b></td></tr>";
+
+                e1.innerHTML=tr1;
+                e2.innerHTML=tr2;
+                e11.innerHTML=tr11;
+                e22.innerHTML=tr22;
+
+                graficar('contEquipo1',equipo1Stats);
+                graficar('contEquipo2',equipo2Stats);
+                graficar('contEquipo1b',equipo1Stats);
+                graficar('contEquipo2b',equipo2Stats);
+                console.log("equipo1Stats",equipo1Stats);
+                console.log("equipo2Stats",equipo2Stats)
+*/
+          break;
+        }
+        let vs = document.getElementById("vs");
+        vs.classList.remove("ocultar");
+      }
+      function calcularStats(nequipo) {
+        let PuntajeEquipo = 0;
+        let PuntajeProm = 0;
+
+        equipos[nequipo].jugadores.forEach((jugador) => {
+          console.log(jugador.Jugador, jugador.Puntaje);
+          PuntajeEquipo += jugador.Puntaje;
+        });
+
+        let equipoStats = {
+          PuntajePromedio:
+            Math.round(
+              (PuntajeEquipo / equipos[nequipo].jugadores.length) * 10
+            ) / 10,
+          Puntaje: PuntajeEquipo,
+        };
+
+        PuntajeEquipo = Math.round(PuntajeEquipo * 10) / 10;
+        equipos[nequipo].jugadores.sort((a, b) => a.Puntaje - b.Puntaje);
+        equipos[nequipo].PuntajeEquipo = PuntajeEquipo;
+        equipos[nequipo].PuntajePromedio = equipoStats.PuntajePromedio;
+
+        llenarTabla(nequipo);
+        //graficar("contEquipo" + (nequipo + 1), equipoStats);
+        //graficar("contEquipo" + (nequipo + 1) + "b", equipoStats);
+      }
+      function llenarTabla(equipo) {
+        let eq = equipo + 1;
+        let tab = "equipo" + eq;
+        let tab2 = tab + eq;
+        let tabla = document.getElementById(tab);
+        let tabla2 = document.getElementById(tab2);
+        let tr = "";
+        let tr2 = "";
+        equipos[equipo].jugadores.forEach((e) => {
+          tr += `<tr><td>${e.Jugador} `+(e.Especialidad=='ARQ'?'<i class="bi bi-door-closed"></i>':(e.Especialidad=='DEF'?'<i class="bi bi-shield-fill-check"></i>':(e.Especialidad=='ATK'?'<i class="bi bi-capslock-fill"></i>':(e.Especialidad=='*'?'<i class="bi bi-asterisk"></i>':''))))+`</td><td>${e.Puntaje}</td><td><button class='btn btn-warning' id="${e.Jugador}" onclick='cambiarJugador(${equipo},"${e.Jugador}",this)'><i class="bi bi-arrow-left-right"></i></button></td></tr>`;
+          //tr2 += "<li class='list-group-item'>" + e.Jugador + "</li>";
+        });
+        equipos[equipo].jugadores.sort((a, b) => a.Posicion-b.Posicion);
+      console.log('ordenados pos',equipos);
+        equipos[equipo].jugadores.forEach((e) => {
+          //tr += `<tr><td>${e.Jugador}</td><td>${e.Puntaje}</td><td><button class='btn btn-warning' id="${e.Jugador}" onclick='cambiarJugador(${equipo},"${e.Jugador}",this)'><i class="bi bi-arrow-left-right"></i></button></td></tr>`;
+          tr2 += "<li class='list-group-item'>" + e.Jugador + "</li>";
+        });
+        tr +=
+          "<tr><td><b>TOTAL</b></td><td><b>" +
+          equipos[equipo].PuntajeEquipo +
+          "</b></td><td></td></tr>";
+        tr +=
+          "<tr><td><b>Promedio</b></td><td><b>" +
+          equipos[equipo].PuntajePromedio +
+          "</b></td><td></td></tr>";
+
+        tabla.innerHTML = tr;
+        tabla2.innerHTML = tr2;
+        let dCard = "cardsE" + (equipo + 1);
+        let dC = document.getElementById(dCard);
+        let cards = "";
+
+        equipos[equipo].jugadores.sort((a, b) => b.Posicion-a.Posicion);
+        equipos[equipo].jugadores.forEach((e) => {
+          let color = equipo == 0 ? "danger" : "primary";
+          cards += `<div class="col-4 px-4 my-1  mb-4 mx-auto">
+            <figure class=" mx-auto" style="max-width:65%;  max-heigth:50% !important"> <img src="./images/${
+                            equipo == 0 ?"azul":"rojo" }.png" class="figure-img img-fluid rounded" >
+              <figcaption class="figure-caption " style="background-color : rgba(0,0,0,0.5)">
+                <h4 class="mx-4 text-center text-white fw-light">${e.Jugador.split(' ')[0]}</h4>
+              </figcaption>
+            </figure>
+            <!--<div class="card   card-rounded bg-${color} bg-gradient text-white" style=" min-height:210px;">
+            <div class="d-flex justify-content-center flex-row align-items-start mt-3 mb-1 pt-2" >
+                <img src="./images/${
+                  e.Jugador
+                }.png" class="card-img-top" style="max-width:60%">
+            </div>
+            <div class="card-body p-2">
+                <h4 class="mx-4 text-center fw-light">${e.Jugador}</h4>
+            <div class="ms-3 mb-3 px-2">
+                <div class="ms-4" style="font-size: 0.8rem;">
+                    <b>ATK:</b>${getStars(e.Ataque)} <br>
+                    <b>DEF:</b>${getStars(e.Defensa)} <br>
+                    <b>VEL:</b>${getStars(e.Velocidad)} <br>
+                    <b>REG:</b>${getStars(e.Regate)} <br>
+                    <b>DISP:</b>${getStars(e.Disparo)} <br>
+                    <b>MOT:</b>${getStars(e.Motivacion)} <br>
+                    
+                </div>
+            </div>
+        </div></div>--></div>`;
+        });
+        dC.innerHTML = cards;
+
+        let div1 = document.getElementById("equipos1");
+        let div2 = document.getElementById("equipos2");
+        let div3 = document.getElementById("equipos3");
+        console.log("equipo,", equipos);
+        console.log("equipos[0].length,", equipos[0].jugadores.length);
+        if (equipos.length) {
+          if (equipos[0].jugadores.length > 0) {
+            div1.classList.remove("d-none");
+            div2.classList.remove("d-none");
+            div3.classList.remove("d-none");
+          } else {
+            div1.classList.add("d-none");
+            div2.classList.add("d-none");
+            div3.classList.add("d-none");
+          }
+        } else {
+          div1.classList.add("d-none");
+          div2.classList.add("d-none");
+          div3.classList.add("d-none");
+        }
+      }
+      function getStars(points) {
+        let stars = "";
+        let llenas = Math.trunc(Math.round(points) / 2);
+        let media = Math.round(points) % 2;
+        for (let i = 0; i < llenas; i++) {
+          stars += '<i class="bi bi-star-fill text-warning"></i>';
+        }
+        if (media != 0) {
+          stars += '<i class="bi bi-star-half text-warning"></i>';
+        }
+
+        for (let i = llenas + media; i < 5; i++) {
+          stars += '<i class="bi bi-star"></i>';
+        }
+        return stars;
+      }
+      function graficar(contenedor, stats) {
+        var graf = new Highcharts.Chart({
+          chart: {
+            renderTo: contenedor,
+            polar: true,
+            type: "line",
+          },
+
+          title: {
+            text: "",
+            x: -80,
+          },
+
+          pane: {
+            size: "90%",
+          },
+
+          xAxis: {
+            categories: ["VEL", "REG", "DIS", "DEF", "ATK", "RES", "MOT"],
+            tickmarkPlacement: "on",
+            lineWidth: 0,
+          },
+
+          yAxis: {
+            gridLineInterpolation: "polygon",
+            lineWidth: 0,
+            min: 0,
+            max: 10,
+            labels: {
+              step: 10,
+            },
+          },
+
+          plotOptions: {
+            area: {
+              dataLabels: {
+                enabled: true,
+              },
+            },
+          },
+          legend: {
+            enabled: false,
+            align: "right",
+            verticalAlign: "middle",
+            layout: "vertical",
+          },
+
+          series: [
+            {
+              type: "area",
+              color: "#43ff6480",
+              name: "Habilidades",
+              data: [
+                stats.Velocidad,
+                stats.Regate,
+                stats.Disparo,
+                stats.Defensa,
+                stats.Ataque,
+                stats.Resistencia,
+                stats.Motivacion,
+              ],
+              pointPlacement: "on",
+            },
+          ],
+          credits: {
+            enabled: false,
+          },
+          responsive: {
+            rules: [
+              {
+                condition: {
+                  maxWidth: 500,
+                },
+                chartOptions: {
+                  legend: {
+                    align: "center",
+                    verticalAlign: "bottom",
+                    layout: "horizontal",
+                  },
+                  pane: {
+                    size: "80%",
+                  },
+                },
+              },
+            ],
+          },
+        });
+      }
+
+      function modalEditar() {
+        const col1 = document.getElementById("players1");
+        const col2 = document.getElementById("players2");
+        let trs1 = "";
+        let trs2 = "";
+
+        Alljugadores.forEach((j, index) => {
+          j.activo = false;
+
+          if (index < Alljugadores.length / 2) {
+            trs1 +=
+              "<tr><td class='text-center'>" +
+              j.Jugador +
+              "</td><td class='text-center'><input id='" +
+              j.Jugador +
+              "' class='form-control' value='" +
+              j.Puntaje +
+              "' type='number' min='1' max='10' /> </td> <td><button class='btn btn-primary' onclick='setPlayer(\"" +
+              j.Jugador +
+              "\")'>Guardar</button></td></tr>";
+          } else {
+            trs2 +=
+              "<tr><td class='text-center'>" +
+              j.Jugador +
+              "</td><td class='text-center'><input id='" +
+              j.Jugador +
+              "' class='form-control' value='" +
+              j.Puntaje +
+              "' type='number' min='1' max='10' /> </td> <td><button class='btn btn-primary' onclick='setPlayer(\"" +
+              j.Jugador +
+              "\")'>Guardar</button></td></tr>";
+          }
+        });
+
+        col1.innerHTML = trs1;
+        col2.innerHTML = trs2;
+        const modalPlayers = new bootstrap.Modal("#modalPlayers");
+        modalPlayers.show();
+        getJugadoresDisponibles();
+      }
+      function openCreatePlayer() {
+        const modalPlayers = new bootstrap.Modal("#modalCreate");
+        document.getElementById('nombre').value='';
+        document.getElementById('puntaje').value='5';
+        
+        modalPlayers.show();
+        getJugadoresDisponibles();
+      }
+      function setPlayer(Jugador) {
+        var ptje = document.getElementById(Jugador).value;
+        console.log(Jugador, ptje);
+        const jug = Alljugadores.find((j) => j.Jugador === Jugador);
+        jug.Puntaje = parseInt(ptje);
+        console.log("all", Alljugadores);
+      }
+      var intercambioJugadores = [];
+      function cambiarJugador(equipo, jugador, a) {
+        console.log(a.classList);
+        a.classList.toggle("disabled");
+        if (intercambioJugadores.length == 0) {
+          intercambioJugadores.push({ team: equipo, nombre: jugador });
+        } else {
+          intercambioJugadores.push({ team: equipo, nombre: jugador });
+          console.log("intercambiamos y luego pintamos todo");
+
+          let index1 = equipos[
+            intercambioJugadores[0].team
+          ].jugadores.findIndex(
+            (e) => e.Jugador == intercambioJugadores[0].nombre
+          );
+          equipos[intercambioJugadores[0].team].jugadores.splice(index1, 1);
+          let index2 = equipos[
+            intercambioJugadores[1].team
+          ].jugadores.findIndex(
+            (e) => e.Jugador == intercambioJugadores[1].nombre
+          );
+          equipos[intercambioJugadores[1].team].jugadores.splice(index2, 1);
+          console.log(index1, index2);
+          //equipos[intercambioJugadores[0].team].filter( (j)=> j.Jugador != intercambioJugadores[0].nombre);
+          //equipos[intercambioJugadores[1].team].filter( (j)=> j.Jugador != intercambioJugadores[1].nombre);
+
+          console.log("intercambio", equipos);
+          equipos[intercambioJugadores[0].team].jugadores.push(
+            Alljugadores.find(
+              (j) => j.Jugador == intercambioJugadores[1].nombre
+            )
+          );
+          equipos[intercambioJugadores[1].team].jugadores.push(
+            Alljugadores.find(
+              (j) => j.Jugador == intercambioJugadores[0].nombre
+            )
+          );
+
+          console.log("equipos luego intercambio", equipos);
+          calcularStats(intercambioJugadores[0].team);
+          calcularStats(intercambioJugadores[1].team);
+          intercambioJugadores = [];
+        }
+
+        console.log("intercambioJugadores", intercambioJugadores);
+      }
+      function modo(input){
+        mode=input;
+        
+        let sel = document.getElementById('sel')
+        let del = document.getElementById('del')
+        if(mode=='Seleccionar'){
+          sel.classList.add('active');
+          del.classList.remove('active');
+        }
+        if(mode=='Eliminar'){
+          sel.classList.remove('active');
+          del.classList.add('active');
+        }
+        document.getElementById('modoSel').innerText=input+' jugadores.';
+      }
+
+      
+    </script>
+  </head>
+
+  <body onload="getJugadoresDisponibles()">
+    <div class="toast-container position-relative top-0 start-50 translate-middle-x p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">Debe ingresar un nombre al jugador nuevo.</div>
+        </div>
+    </div>
+    <div class="container-fluid">
+      <!-- <div class="row mt-2 mb-2">
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-info text-white" onclick="modalEditar()"><b>Editar Jugadores</b></button>
+            </div>
+        </div> -->
+      <div class="accordion mb-3" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              <h2>
+                Jugadores Disponibles
+                <span class="badge bg-secondary" id="seleccionados"></span>
+              </h2>
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-12 col-md-4 d-grid gap-2 mt-2">
+                  <button id='sel'class="btn btn-primary fw-bold active" onclick="modo('Seleccionar')">Seleccionar</button>
+                </div>
+                <div class="col-12 col-md-4 d-grid gap-2 mt-2">
+                  <button id='edit'class="btn btn-warning fw-bold" onclick="modo('Editar')">Editar</button>
+                </div>
+                <div class="col-12 col-md-4 d-grid gap-2 mt-2">
+                  <button id='del'class="btn btn-danger fw-bold" onclick="modo('Eliminar')">Eliminar</button>
+                </div>
+              </div>
+              <div class="row">
+                <p>Modo: <b id="modoSel">Seleccionar jugadores.</b></p>
+              </div>
+              <div
+                class="row mt-2 py-4 bg-light bg-gradient"
+                id="jugadoresDisponibles"
+              ></div>
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-success"
+                  onclick="openCreatePlayer()"
+                  type="button"
+                >
+                  Nuevo Jugador
+                </button>
+                <button
+                  class="btn btn-primary"
+                  onclick="saveAll()"
+                  type="button"
+                >
+                  Guardar Jugadores
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <button class="btn btn-success" onclick="armar()">
+            Armar Equipos
+          </button>
+        </div>
+      </div>
+      <div class="row mt-2 d-none" id="equipos1">
+        <div class="col-12 col-md-6">
+          <div class="card mb-3">
+            <div class="card-header text-white bg-primary">Equipo Azul</div>
+            <div class="card-body bg-light">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Puntaje</th>
+                          <th>Cambiar</th>
+                        </tr>
+                      </thead>
+                      <tbody id="equipo1"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card mb-3">
+            <div class="card-header text-white bg-danger">Equipo Rojo</div>
+            <div class="card-body bg-light">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Puntaje</th>
+                          <th>Cambiar</th>
+                        </tr>
+                      </thead>
+                      <tbody id="equipo2"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3 d-none" id="equipos2">
+        <div class="col-12 col-md-6">
+          <hr />
+          <div class="card bg-light mb-3 mt-3">
+            <div class="card-header text-white bg-primary">Equipo Azul</div>
+            <div class="card-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col">
+                    <ul class="list-group" id="equipo11"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <hr />
+          <div class="card bg-light mb-3 mt-3">
+            <div class="card-header text-white bg-danger">Equipo Rojo</div>
+            <div class="card-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col">
+                    <ul class="list-group" id="equipo22"></ul>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2 d-none" id="equipos3">
+        <div class="col-12 col-md-6">
+          <div
+            class="card bg-success bg-gradient cancha"
+            style="
+              height: 700px;
+              padding-top: 20px;
+              background-image: url('./images/cancha.png') !important ;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              background-size: cover !important;
+            "
+          >
+            <div
+              id="cardsE1"
+              class="row d-flex justify-content-evenly flex-column bd-highlight flex-wrap-reverse align-items-end"
+              style="height: 650px"
+            ></div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div
+            class="card bg-success bg-gradient"
+            style="
+              height: 700px;
+              padding-top: 20px;
+              background-image: url('./images/cancha2.png') !important ;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              background-size: cover !important;
+            "
+          >
+            <div
+              id="cardsE2"
+              class="row d-flex justify-content-evenly flex-column bd-highlight flex-wrap align-items-end"
+              style="height: 650px"
+            ></div>
+          </div>
+        </div>
+        <div
+          id="vs"
+          class="d-flex justify-content-center align-items-center text-center m-0 p-0 ocultar vs"
+          style=""
+        >
+          <b style="color: yellow">VS</b>
+        </div>
+      </div>
+    </div>
+    <div style="height: 100px"></div>
+    <div
+      class="modal fade"
+      id="modalPlayers"
+      tabindex="-1"
+      aria-labelledby="modalPlayersLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalPlayersLabel">Editar Jugadores</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-6">
+                  <table class="table table-sm table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Puntaje</th>
+                        <th>Guardar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="players1"></tbody>
+                  </table>
+                </div>
+                <div class="col-6">
+                  <table class="table table-sm table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Puntaje</th>
+                        <th>Guardar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="players2"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modalCreate"
+      tabindex="-1"
+      aria-labelledby="modalCreateLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCreateLabel">Crear Jugador</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <label for="nombre">Nombre:</label>
+                  <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    placeholder="Ingrese nombre"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="puntaje">Puntaje:</label>
+                  <input
+                    type="number"
+                    max="10"
+                    min="1"
+                    name="puntaje"
+                    id="puntaje"
+                    value="5"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="posicion">Posicion:</label>
+                  <select name="posicion" id="posicion" class="form-control">
+                    <option value="ARQ">Arquero</option>
+                    <option value="DEF">Defensa</option>
+                    <option value="ATK">Delantero</option>
+                    <option value="*">*</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="createPlayer()"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modalEdit"
+      tabindex="-1"
+      aria-labelledby="modalEditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditLabel">Crear Jugador</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <label for="nombre">Nombre:</label>
+                  <input
+                    type="text"
+                    name="nombreEdit"
+                    id="nombreEdit"
+                    placeholder="Ingrese nombre"
+                    class="form-control" readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="puntajeEdit">Puntaje:</label>
+                  <input
+                    type="number"
+                    max="10"
+                    min="1"
+                    name="puntajeEdit"
+                    id="puntajeEdit"
+                    value="5"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="posicionEdit">Posicion:</label>
+                  <select name="posicionEdit" id="posicionEdit" class="form-control">
+                    <option value="ARQ">Arquero</option>
+                    <option value="DEF">Defensa</option>
+                    <option value="ATK">Delantero</option>
+                    <option value="*">*</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="guardarEdit()"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function createPlayer() {
+        let nombre = document.getElementById("nombre");
+        
+        let posicion = document.getElementById("posicion");
+        var value = posicion.value;
+        var text = posicion.options[posicion.selectedIndex].text;
+        let puntaje = document.getElementById("puntaje");
+        console.log('nombre.value.trim() ==""', nombre.value.trim() == "");
+        const toastLiveExample = document.getElementById("liveToast");
+
+          const toastBootstrap =
+            bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+        if (nombre.value.trim() == "") {
+          console.log("entramos");
+          
+
+          toastBootstrap.show();
+        }else{
+            const np = {
+                Jugador:nombre.value,
+                Puntaje:parseFloat(puntaje.value),
+                Especialidad:value,
+                activo:true
+            }
+            Alljugadores.push(np);
+            
+            const modalPlayers =  bootstrap.Modal.getInstance("#modalCreate");
+            modalPlayers.hide();
+            jugadores.push(np)
+            getJugadoresDisponibles();
+            console.log(Alljugadores)
+        }
+
+      }
+      var jugadorAEditar='';
+      function editarJugador(nombre){
+        console.log('editar')
+        jugadorAEditar=nombre;
+        let jug=Alljugadores.find(j =>j.Jugador==nombre);
+        let editPuntaje=jug.Puntaje;
+        let editPosicion=jug.Especialidad;
+        document.getElementById('nombreEdit').value=jug.Jugador;
+        document.getElementById('puntajeEdit').value=editPuntaje;
+        document.getElementById('posicionEdit').value=editPosicion;
+        const modalPlayers = new bootstrap.Modal("#modalEdit");
+        modalPlayers.show();
+      }
+
+      function guardarEdit(){
+        console.log('jugadoraeditar',jugadorAEditar)
+        let jug=Alljugadores.find(j =>j.Jugador==jugadorAEditar);
+        jug.Puntaje=document.getElementById('puntajeEdit').value;
+        let posicion = document.getElementById("posicionEdit");
+        var value = posicion.value;
+        var text = posicion.options[posicion.selectedIndex].text;
+        jug.Especialidad=value;
+        getJugadoresDisponibles();
+        var myModalEl = document.getElementById('modalEdit')
+        var modal = bootstrap.Modal.getInstance(myModalEl) 
+        modal.hide();
+      }
+    </script>
+  </body>
+</html>
