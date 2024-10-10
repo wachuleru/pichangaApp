@@ -24,7 +24,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
     />
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.7/js/jquery.jexcel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.7/css/jquery.jexcel.css" type="text/css" />
     <script>
       let mode='Seleccionar';
       let Alljugadores = [
@@ -1171,6 +1174,15 @@
         modalPlayers.show();
         getJugadoresDisponibles();
       }
+
+      function openCreatePlayers() {
+        const modalPlayers = new bootstrap.Modal("#modalCreatePlayers");
+        let a= $('#jugadoresData').jexcel('setData',[['']]);
+        document.getElementById('alertD').classList.add('d-none');
+        document.getElementById('msgAlert').innerText='';
+        modalPlayers.show();
+        getJugadoresDisponibles();
+      }
       function setPlayer(Jugador) {
         var ptje = document.getElementById(Jugador).value;
         console.log(Jugador, ptje);
@@ -1303,6 +1315,13 @@
                 id="jugadoresDisponibles"
               ></div>
               <div class="d-grid gap-2">
+                <button
+                  class="btn btn-success"
+                  onclick="openCreatePlayers()"
+                  type="button"
+                >
+                  Carga Jugadores
+                </button>
                 <button
                   class="btn btn-success"
                   onclick="openCreatePlayer()"
@@ -1612,7 +1631,7 @@
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalEditLabel">Crear Jugador</h5>
+            <h5 class="modal-title" id="modalEditLabel">Editar Jugador</h5>
             <button
               type="button"
               class="btn-close"
@@ -1665,6 +1684,57 @@
               type="button"
               class="btn btn-primary"
               onclick="guardarEdit()"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="modalCreatePlayers"
+      tabindex="-1"
+      aria-labelledby="modalCreatePlayersLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCreatePlayersLabel">Crear Jugadores</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div id="alertD" class="d-none"><div class="alert alert-danger" role="alert" id="msgAlert">
+                    
+                  </div></div>
+                  <div id="jugadoresData"></div>
+                </div>
+                  
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="guardarJugadores()"
             >
               Guardar
             </button>
@@ -1741,6 +1811,102 @@
         var modal = bootstrap.Modal.getInstance(myModalEl) 
         modal.hide();
       }
+      console.log('tabla')
+      var dataJug = [['']]
+      
+      $('#jugadoresData').jexcel({
+         data:dataJug,
+         colWidths: [ 500, 80, 200 ],
+         colHeaders:  [ 'Nombre','Puntaje','Posicion'],
+         columns: [
+                { type: 'text' },
+                { type: 'numeric'},
+                { type: 'dropdown',source:[
+                "Arquero",
+                "Defensa",
+                "Delantero",
+                "*"
+              ] }
+
+                    
+            ]
+        });  
+
+        function guardarJugadores(){
+          console.log('guardarJugadores')
+          let a= $('#jugadoresData').jexcel('getData',false);
+          
+          document.getElementById('alertD').classList.add('d-none');
+          document.getElementById('msgAlert').innerText='';
+          let l=a.length;
+          let i=0;
+          let retorno=``;
+          let jugadores=[];
+          let [aa,bb]=[retorno,jugadores];
+          a.forEach( r =>{
+            [aa,bb]=validarJugadores(r[0],r[1],r[2],aa,bb)
+            
+          });
+          if(aa.length){
+            document.getElementById('alertD').classList.remove('d-none');
+            document.getElementById('msgAlert').innerText=aa;
+            
+
+          }else{
+            a.forEach( r =>{
+              crearJugador(r[0],r[1],r[2])
+            });
+            var myModalEl = document.getElementById('modalCreatePlayers')
+            var modal = bootstrap.Modal.getInstance(myModalEl) 
+            modal.hide();
+          }
+          console.log('aa',aa)
+          console.log('bb',bb)
+        }
+        function validarJugadores(nombre,puntaje,posicion,retorno,jugadores){
+          console.log(nombre)
+          console.log('retorno',retorno)
+          let pje=parseFloat(puntaje);
+          let pos = ["Arquero","Defensa","Delantero","*"] ;
+          let jug=Alljugadores.find(j =>j.Jugador==nombre);
+          console.log('jugadores',jugadores)
+          let dd =jugadores.find(aaa => aaa.Jugador==nombre)
+          console.log('dd',dd)
+          if(dd){
+            retorno= retorno.length==0? `Ya existe un jugador con el nombre ${nombre}.`: (retorno+`
+            Ya existe un jugador con el nombre ${nombre}.`);
+          }else if(jug ){
+            retorno= retorno.length==0? `Ya existe un jugador con el nombre ${nombre}.`: (retorno+`
+            Ya existe un jugador con el nombre ${nombre}.`);
+          }else if(pje<1 || pje>10){
+            retorno= retorno.length==0?`El jugador ${nombre} tiene un puntaje incorrecto. El puntaje debe ser un numero entre 1 y 10`:(retorno+`
+            El jugador ${nombre} tiene un puntaje incorrecto. El puntaje debe ser un numero entre 1 y 10`);
+            //alert('El jugador '+nombre+' tiene un puntaje incorrecto. El puntaje debe ser un numero entre 1 y 10')
+          }else if(!pos.includes(posicion)){
+            retorno= retorno.length==0?`La posición para ${nombre} no es correcta`:(retorno+`
+            La posición para ${nombre} no es correcta`);
+            //alert('La posición para '+nombre+' no es correcta');
+          }else{
+            let esp= posicion=='Arquero'?'ARQ':(posicion=='Defensa'?'DEF':(posicion=='Delantero'?'ATK':posicion))
+            jugadores.push({Jugador:nombre, Puntaje:puntaje, Especialidad: esp})
+            console.log(nombre,'jugadores',jugadores)
+          }
+          console.log(nombre,'retorno',retorno);
+          return [retorno,jugadores];
+        }
+        function crearJugador(nombre,puntaje,posicion){
+          console.log(nombre)
+          let pje=parseFloat(puntaje);
+          let pos = ["Arquero","Defensa","Delantero","*"] ;
+          let jug=Alljugadores.find(j =>j.Jugador==nombre);
+          
+          let esp= posicion=='Arquero'?'ARQ':(posicion=='Defensa'?'DEF':(posicion=='Delantero'?'ATK':posicion))
+          Alljugadores.push({Jugador:nombre, Puntaje:puntaje, Especialidad: esp})
+          
+
+          console.log(Alljugadores)
+          getJugadoresDisponibles();
+        }
     </script>
   </body>
 </html>
