@@ -2112,7 +2112,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            onclick="createPlayer()"
+            onclick="editPlayer()"
           >
             Guardar
           </button>
@@ -2190,7 +2190,9 @@
         let motivacion = document.getElementById("motivacion");
         console.log('nombre.value.trim() ==""', nombre.value.trim() == "");
         const toastLiveExample = document.getElementById("liveToast");
-
+        let posicion = document.getElementById("posicion");
+        var value = posicion.value;
+        var text = posicion.options[posicion.selectedIndex].text;
           const toastBootstrap =
             bootstrap.Toast.getOrCreateInstance(toastLiveExample);
         if (nombre.value.trim() == "") {
@@ -2208,7 +2210,7 @@
                 Ataque:parseInt(ataque.value),
                 Resistencia:parseInt(resistencia.value),
                 Motivacion:parseInt(motivacion.value),
-                Especialidad:'',
+                Especialidad:value,
                 activo:true
             }
             Alljugadores.push(np);
@@ -2363,6 +2365,34 @@
           console.log(Alljugadores)
           getJugadoresDisponibles();
         }
+
+        function editPlayer() {
+
+        let nombre = jugadorAEditar;
+        let ataque = document.getElementById("ataqueEdit").value;
+        let defensa = document.getElementById("defensaEdit").value;
+        let velocidad= document.getElementById("velocidadEdit").value;
+        let resistencia= document.getElementById("resistenciaEdit").value;
+        let regate = document.getElementById("regateEdit").value;
+        let disparo = document.getElementById("disparoEdit").value;
+        let motivacion = document.getElementById("motivacionEdit").value;
+        let posicion = document.getElementById("posicionEdit");
+        var value = posicion.value;
+        var text = posicion.options[posicion.selectedIndex].text;
+        let jug=Alljugadores.find(j =>j.Jugador==jugadorAEditar);
+        jug.Ataque=ataque;
+        jug.Defensa=defensa;
+        jug.Disparo=disparo;
+        jug.Especialidad=value;
+        jug.Motivacion=motivacion;
+        jug.Regate=regate;
+        jug.Resistencia=resistencia;
+        jug.Velocidad=velocidad;
+        
+        const modalPlayers =  bootstrap.Modal.getInstance("#modalEdit");
+        modalPlayers.hide();
+        getJugadoresDisponibles();
+      }
     </script>
   </body>
 </html>
