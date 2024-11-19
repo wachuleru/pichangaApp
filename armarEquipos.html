@@ -24,10 +24,18 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.7/js/jquery.jexcel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.7/css/jquery.jexcel.css" type="text/css" />
     <script>
       let mode='Seleccionar';
       let Alljugadores = [
-      {
+      /* {
         Jugador: "Arturo Zapata",
         Velocidad: 8,
         Regate: 9.75,
@@ -410,7 +418,7 @@
         Motivacion: 7,
         Especialidad: "DEF",
         activo: false,
-      }
+      } */
       ];
       if (typeof(Storage) !== "undefined") {
         let data= localStorage.getItem("jugadores");
@@ -861,7 +869,9 @@
             console.log('jugadores',jugadores)
             getJugadoresDisponibles();
           }
-          }
+        }else if(mode=='Editar'){
+          editarJugador(name);
+        }
           
         
       }
@@ -1399,6 +1409,24 @@
       }
       function openCreatePlayer() {
         const modalPlayers = new bootstrap.Modal("#modalCreate");
+        document.getElementById('nombre').value='';
+        document.getElementById("velocidad").value='5';
+        document.getElementById("resistencia").value='5';
+        document.getElementById("ataque").value='5';
+        document.getElementById("defensa").value='5';
+        document.getElementById("regate").value='5';
+        document.getElementById("disparo").value='5';
+        document.getElementById("motivacion").value='5';
+        
+        modalPlayers.show();
+        getJugadoresDisponibles();
+      }
+
+      function openCreatePlayers() {
+        const modalPlayers = new bootstrap.Modal("#modalCreatePlayers");
+        let a= $('#jugadoresData').jexcel('setData',[['']]);
+        document.getElementById('alertD').classList.add('d-none');
+        document.getElementById('msgAlert').innerText='';
         modalPlayers.show();
         getJugadoresDisponibles();
       }
@@ -1460,13 +1488,21 @@
         
         let sel = document.getElementById('sel')
         let del = document.getElementById('del')
+        let edit = document.getElementById('edit')
         if(mode=='Seleccionar'){
           sel.classList.add('active');
           del.classList.remove('active');
+          edit.classList.remove('active');
         }
         if(mode=='Eliminar'){
           sel.classList.remove('active');
+          edit.classList.remove('active');
           del.classList.add('active');
+        }
+        if(mode=='Editar'){
+          sel.classList.remove('active');
+          del.classList.remove('active');
+          edit.classList.add('active');
         }
         document.getElementById('modoSel').innerText=input+' jugadores.';
       }
@@ -1514,11 +1550,14 @@
           >
             <div class="accordion-body">
               <div class="row">
-                <div class="col d-grid gap-2">
-                  <button id='sel'class="btn btn-primary active" onclick="modo('Seleccionar')">Seleccionar</button>
+                <div class="col-12 col-md-4 d-grid gap-2 mt-2">
+                  <button id='sel'class="btn btn-primary fw-bold active" onclick="modo('Seleccionar')">Seleccionar</button>
                 </div>
-                <div class="col d-grid gap-2">
-                  <button id='del'class="btn btn-danger" onclick="modo('Eliminar')">Eliminar</button>
+                <div class="col-12 col-md-4 d-grid gap-2 mt-2">
+                  <button id='edit'class="btn btn-warning fw-bold" onclick="modo('Editar')">Editar</button>
+                </div>
+                <div class="col-12 col-md-4 d-grid gap-2 mt-2">
+                  <button id='del'class="btn btn-danger fw-bold" onclick="modo('Eliminar')">Eliminar</button>
                 </div>
               </div>
               <div class="row">
@@ -1529,6 +1568,13 @@
                 id="jugadoresDisponibles"
               ></div>
               <div class="d-grid gap-2">
+                <button
+                  class="btn btn-success"
+                  onclick="openCreatePlayers()"
+                  type="button"
+                >
+                  Carga Jugadores
+                </button>
                 <button
                   class="btn btn-success"
                   onclick="openCreatePlayer()"
@@ -1895,6 +1941,15 @@
                     class="form-control"
                   />
                 </div>
+                <div class="col-6">
+                  <label for="posicion">Posicion:</label>
+                  <select name="posicion" id="posicion" class="form-control">
+                    <option value="ARQ">Arquero</option>
+                    <option value="DEF">Defensa</option>
+                    <option value="ATK">Delantero</option>
+                    <option value="*">*</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -1917,7 +1972,212 @@
         </div>
       </div>
     </div>
+    <div
+    class="modal fade"
+    id="modalEdit"
+    tabindex="-1"
+    aria-labelledby="modalEditLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditLabel">Modificar Jugador</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
 
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <label for="nombreEdit">Nombre:</label>
+                <input
+                  type="text"
+                  name="nombreEdit"
+                  id="nombreEdit"
+                  placeholder="Ingrese nombre"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="ataqueEdit">Ataque:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="ataqueEdit"
+                  id="ataqueEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-6">
+                <label for="defensaEdit">Defensa:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="defensaEdit"
+                  id="defensaEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="velocidadEdit">Velocidad:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="velocidadEdit"
+                  id="velocidadEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-6">
+                <label for="resistenciaEdit">Resistencia:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="resistenciaEdit"
+                  id="resistenciaEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="regateEdit">Regate:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="regateEdit"
+                  id="regateEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-6">
+                <label for="disparoEdit">Disparo:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="disparoEdit"
+                  id="disparoEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="motivacionEdit">Motivacion:</label>
+                <input
+                  type="number"
+                  max="10"
+                  min="1"
+                  name="motivacionEdit"
+                  id="motivacionEdit"
+                  value="5"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-6">
+                <label for="posicionEdit">Posicion:</label>
+                  <select name="posicionEdit" id="posicionEdit" class="form-control">
+                    <option value="ARQ">Arquero</option>
+                    <option value="DEF">Defensa</option>
+                    <option value="ATK">Delantero</option>
+                    <option value="*">*</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="createPlayer()"
+          >
+            Guardar
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+      class="modal fade"
+      id="modalCreatePlayers"
+      tabindex="-1"
+      aria-labelledby="modalCreatePlayersLabel"
+      aria-hidden="true"  
+    >
+      <div class="modal-dialog modal-xl"  style="max-width:100vw !important">
+        <div class="modal-content" style='width: 90vw !important; margin: auto; max-width:100vw !important'>
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCreatePlayersLabel">Crear Jugadores</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <div id="alertD" class="d-none"><div class="alert alert-danger" role="alert" id="msgAlert">
+                    
+                  </div></div>
+                  <div id="jugadoresData"></div>
+                </div>
+                  
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="guardarJugadores()"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
       function createPlayer() {
         let nombre = document.getElementById("nombre");
@@ -1960,6 +2220,149 @@
         }
 
       }
+
+      var jugadorAEditar='';
+      function editarJugador(nombre){
+        console.log('editar')
+        jugadorAEditar=nombre;
+        let jug=Alljugadores.find(j =>j.Jugador==nombre);
+        let editPosicion=jug.Especialidad;
+        console.log(editPosicion)
+        document.getElementById("velocidadEdit").value=jug.Velocidad;
+        document.getElementById("resistenciaEdit").value=jug.Resistencia;
+        document.getElementById("ataqueEdit").value=jug.Ataque;
+        document.getElementById("defensaEdit").value=jug.Defensa;
+        document.getElementById("regateEdit").value=jug.Regate;
+        document.getElementById("disparoEdit").value=jug.Disparo;
+        document.getElementById("motivacionEdit").value=jug.Motivacion;
+        document.getElementById('nombreEdit').value=jug.Jugador;
+        document.getElementById('posicionEdit').value=editPosicion;
+        const modalPlayers = new bootstrap.Modal("#modalEdit");
+        modalPlayers.show();
+      }
+
+      var dataJug = [['']]
+      
+      $('#jugadoresData').jexcel({
+         data:dataJug,
+         colWidths: [ 500, 100, 100,100,100,100,100,100,200 ],
+         colHeaders:  [ 'Nombre','Velocidad','Resistencia','Ataque','Defensa','Regate','Disparo','Motivacion','Posicion'],
+         columns: [
+                { type: 'text' },
+                { type: 'numeric'},
+                { type: 'numeric'},
+                { type: 'numeric'},
+                { type: 'numeric'},
+                { type: 'numeric'},
+                { type: 'numeric'},
+                { type: 'numeric'},
+                { type: 'dropdown',source:[
+                "Arquero",
+                "Defensa",
+                "Delantero",
+                "*"
+              ] }
+
+                    
+            ]
+        });  
+
+        function guardarJugadores(){
+          console.log('guardarJugadores')
+          let a= $('#jugadoresData').jexcel('getData',false);
+          
+          document.getElementById('alertD').classList.add('d-none');
+          document.getElementById('msgAlert').innerText='';
+          let l=a.length;
+          let i=0;
+          let retorno=``;
+          let jugadores=[];
+          let [aa,bb]=[retorno,jugadores];
+          a.forEach( r =>{
+            [aa,bb]=validarJugadores(r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],aa,bb)
+            
+          });
+          if(aa.length){
+            document.getElementById('alertD').classList.remove('d-none');
+            document.getElementById('msgAlert').innerText=aa;
+            
+
+          }else{
+            a.forEach( r =>{
+              crearJugador(r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7])
+            });
+            var myModalEl = document.getElementById('modalCreatePlayers')
+            var modal = bootstrap.Modal.getInstance(myModalEl) 
+            modal.hide();
+          }
+          console.log('aa',aa)
+          console.log('bb',bb)
+        }
+        function validarJugadores(nombre,Velocidad,Resistencia,Ataque,Defensa,Regate,Disparo,Motivacion,posicion,retorno,jugadores){
+          console.log(nombre)
+          console.log('retorno',retorno)
+          let pos = ["Arquero","Defensa","Delantero","*"] ;
+          let jug=Alljugadores.find(j =>j.Jugador==nombre);
+          console.log('jugadores',jugadores)
+          let dd;
+          if(jugadores != undefined){
+             dd =jugadores.find(aaa => aaa.Jugador==nombre)
+          }else{
+            dd=null;
+
+          }
+          Velocidad=parseFloat(Velocidad)
+          Resistencia=parseFloat(Resistencia)
+          Ataque=parseFloat(Ataque)
+          Defensa=parseFloat(Defensa)
+          Regate=parseFloat(Regate)
+          Disparo=parseFloat(Disparo)
+          Motivacion=parseFloat(Motivacion)
+          console.log('dd',dd)
+          if(dd){
+            retorno= retorno.length==0? `Ya existe un jugador con el nombre ${nombre}.`: (retorno+`
+            Ya existe un jugador con el nombre ${nombre}.`);
+          }else if(jug ){
+            retorno= retorno.length==0? `Ya existe un jugador con el nombre ${nombre}.`: (retorno+`
+            Ya existe un jugador con el nombre ${nombre}.`);
+          }else if((Velocidad<1 || Velocidad>10) || (Resistencia<1 || Resistencia>10) || (Ataque<1 || Ataque>10) || (Defensa<1 || Defensa>10) || (Regate<1 || Regate>10) || (Disparo<1 || Disparo>10) || (Motivacion<1 || Motivacion>10)){
+            retorno= retorno.length==0?`El jugador ${nombre} tiene un puntaje incorrecto en alguna habilidad. El puntaje debe ser un numero entre 1 y 10`:(retorno+`
+            El jugador ${nombre} tiene un puntaje incorrecto en alguna habilidad. El puntaje debe ser un numero entre 1 y 10`);
+            //alert('El jugador '+nombre+' tiene un puntaje incorrecto. El puntaje debe ser un numero entre 1 y 10')
+          }else if(!pos.includes(posicion)){
+            retorno= retorno.length==0?`La posición para ${nombre} no es correcta`:(retorno+`
+            La posición para ${nombre} no es correcta`);
+            //alert('La posición para '+nombre+' no es correcta');
+          }else{
+            let esp= posicion=='Arquero'?'ARQ':(posicion=='Defensa'?'DEF':(posicion=='Delantero'?'ATK':posicion))
+            jugadores.push({Jugador:nombre, Velocidad:Velocidad,Resistencia:Resistencia,
+              Ataque:Ataque,
+              Defensa:Defensa,
+              Regate:Regate,
+              Disparo:Disparo,
+              Motivacion:Motivacion, Especialidad: esp})
+            console.log(nombre,'jugadores',jugadores)
+          }
+          console.log(nombre,'retorno',retorno);
+          return [retorno,jugadores];
+        }
+        function crearJugador(nombre,Velocidad,Resistencia,Ataque,Defensa,Regate,Disparo,Motivacion,posicion){
+          console.log(nombre)
+          let pos = ["Arquero","Defensa","Delantero","*"] ;
+          let jug=Alljugadores.find(j =>j.Jugador==nombre);
+          
+          let esp= posicion=='Arquero'?'ARQ':(posicion=='Defensa'?'DEF':(posicion=='Delantero'?'ATK':posicion))
+          Alljugadores.push({Jugador:nombre, Velocidad:Velocidad,Resistencia:Resistencia,
+            Ataque:Ataque,
+            Defensa:Defensa,
+            Regate:Regate,
+            Disparo:Disparo,
+            Motivacion:Motivacion, Especialidad: esp})
+          
+
+          console.log(Alljugadores)
+          getJugadoresDisponibles();
+        }
     </script>
   </body>
 </html>

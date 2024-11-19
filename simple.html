@@ -1241,13 +1241,21 @@
         
         let sel = document.getElementById('sel')
         let del = document.getElementById('del')
+        let edit = document.getElementById('edit')
         if(mode=='Seleccionar'){
           sel.classList.add('active');
           del.classList.remove('active');
+          edit.classList.remove('active');
         }
         if(mode=='Eliminar'){
           sel.classList.remove('active');
+          edit.classList.remove('active');
           del.classList.add('active');
+        }
+        if(mode=='Editar'){
+          sel.classList.remove('active');
+          del.classList.remove('active');
+          edit.classList.add('active');
         }
         document.getElementById('modoSel').innerText=input+' jugadores.';
       }
