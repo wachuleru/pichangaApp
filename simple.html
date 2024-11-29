@@ -1800,7 +1800,7 @@
         let editPuntaje=jug.Puntaje;
         let editPosicion=jug.Especialidad;
         document.getElementById('nombreEdit').value=jug.Jugador;
-        document.getElementById('puntajeEdit').value=editPuntaje;
+        document.getElementById('puntajeEdit').value=parseFloat(editPuntaje);
         document.getElementById('posicionEdit').value=editPosicion;
         const modalPlayers = new bootstrap.Modal("#modalEdit");
         modalPlayers.show();
@@ -1809,7 +1809,7 @@
       function guardarEdit(){
         console.log('jugadoraeditar',jugadorAEditar)
         let jug=Alljugadores.find(j =>j.Jugador==jugadorAEditar);
-        jug.Puntaje=document.getElementById('puntajeEdit').value;
+        jug.Puntaje=parseFloat(document.getElementById('puntajeEdit').value);
         let posicion = document.getElementById("posicionEdit");
         var value = posicion.value;
         var text = posicion.options[posicion.selectedIndex].text;
