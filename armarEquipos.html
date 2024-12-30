@@ -2380,14 +2380,14 @@
         var value = posicion.value;
         var text = posicion.options[posicion.selectedIndex].text;
         let jug=Alljugadores.find(j =>j.Jugador==jugadorAEditar);
-        jug.Ataque=ataque;
-        jug.Defensa=defensa;
-        jug.Disparo=disparo;
+        jug.Ataque=parseFloat(ataque);
+        jug.Defensa=parseFloat(defensa);
+        jug.Disparo=parseFloat(disparo);
         jug.Especialidad=value;
-        jug.Motivacion=motivacion;
-        jug.Regate=regate;
-        jug.Resistencia=resistencia;
-        jug.Velocidad=velocidad;
+        jug.Motivacion=parseFloat(motivacion);
+        jug.Regate=parseFloat(regate);
+        jug.Resistencia=parseFloat(resistencia);
+        jug.Velocidad=parseFloat(velocidad);
         
         const modalPlayers =  bootstrap.Modal.getInstance("#modalEdit");
         modalPlayers.hide();
