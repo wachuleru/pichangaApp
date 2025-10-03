@@ -52,3 +52,57 @@
   background-color: rgba(0,0,0,0.75);
   padding : 2rem 3rem;
 }
+
+.cancha {
+      width: 100%;
+      max-width: 90vw;
+      height: 450px;
+      background: green;
+      border: 5px solid white;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+
+    .lado {
+      width: 48%;
+      height: 100%;
+      border: 1px dashed white;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 5px;
+    }
+
+    .columna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly; /* ✅ espaciado vertical dinámico */
+  flex: 1;
+}
+
+
+    .jugador {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  color: white;
+  font-weight: bold;
+  background-color: gray;
+  text-wrap: wrap;
+  text-align: center;
+  padding: 5px;
+}
+
+    .formulario {
+      max-width: 900px;
+      margin: 20px auto;
+    }
+    

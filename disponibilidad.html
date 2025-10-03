@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas Canchas de Fútbol</title>
+  <!-- Agregar Bootstrap desde el CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* Colores personalizados para la temática de fútbol */
+    .cancha-card {
+      background-color: #28a745;
+      color: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .cancha-card h5 {
+      font-weight: bold;
+    }
+    .cancha-card .hora {
+      background-color: #066e02;
+      border-radius: 4px;
+      margin: 5px;
+      padding: 5px 10px;
+    }
+    .cancha-card .hora:hover {
+      background-color: #f1f1f1;
+    }
+    .disabled {
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <!-- Mensaje de carga -->
+  <div id="loading-message" class="alert alert-info" role="alert">
+    <i class="bi bi-hourglass-split"></i> Cargando datos... por favor espere.
+  </div>
+
+  <!-- Calendario para seleccionar el día -->
+  <div id="calendar-container" class="d-none">
+    <h2>Selecciona una fecha para reservar una cancha</h2>
+    <input type="date" id="date-picker" class="form-control" min="" />
+    <button id="fetch-schedule" class="btn btn-primary mt-3 disabled" disabled>Consultar disponibilidad</button>
+  </div>
+
+  <!-- Contenedor donde se mostrarán los horarios de las canchas -->
+  <div id="schedules-container" class="d-none">
+    <h2>Disponibilidad de canchas</h2>
+    <div id="cancha1" class="cancha-card"></div>
+    <div id="cancha2" class="cancha-card"></div>
+    <div id="cancha3" class="cancha-card"></div>
+  </div>
+</div>
+
+<!-- Agregar Bootstrap JS y dependencias -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<script>
+  // Primero llamamos al endpoint de la disponibilidad del servicio
+  fetch("https://apicanchasdeluxe.onrender.com/")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No se pudo conectar con el servicio.");
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Si la respuesta es exitosa, habilitamos el calendario
+      document.getElementById('loading-message').classList.add('d-none');
+      document.getElementById('calendar-container').classList.remove('d-none');
+      document.getElementById('date-picker').min = new Date().toISOString().split("T")[0];
+    })
+    .catch(error => {
+      alert("Error al conectar con el servidor: " + error.message);
+    });
+
+  // Función para cargar los horarios de las canchas
+  function loadSchedules(date) {
+    fetch(`https://apicanchasdeluxe.onrender.com/dia/${date}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("No se pudo cargar los horarios.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Mostrar los horarios en las canchas
+        document.getElementById('schedules-container').classList.remove('d-none');
+
+        // Limpiar los contenedores antes de añadir los horarios
+        document.getElementById('cancha1').innerHTML = '<h5>Cancha 1</h5>';
+        document.getElementById('cancha2').innerHTML = '<h5>Cancha 2</h5>';
+        document.getElementById('cancha3').innerHTML = '<h5>Cancha 3</h5>';
+
+        data.cancha1.forEach(hora => {
+          document.getElementById('cancha1').innerHTML += `<div class="hora">${hora}</div>`;
+        });
+        data.cancha2.forEach(hora => {
+          document.getElementById('cancha2').innerHTML += `<div class="hora">${hora}</div>`;
+        });
+        data.cancha3.forEach(hora => {
+          document.getElementById('cancha3').innerHTML += `<div class="hora">${hora}</div>`;
+        });
+      })
+      .catch(error => {
+        alert("Error al cargar los horarios: " + error.message);
+      });
+  }
+
+  // Función para manejar el evento de cambio de fecha
+  document.getElementById('date-picker').addEventListener('change', function() {
+    const selectedDate = this.value;
+    if (selectedDate) {
+      document.getElementById('fetch-schedule').disabled = false;
+      document.getElementById('fetch-schedule').classList.remove('disabled');
+    }
+  });
+
+  // Evento para consultar disponibilidad al hacer clic en el botón
+  document.getElementById('fetch-schedule').addEventListener('click', function() {
+    const selectedDate = document.getElementById('date-picker').value;
+    if (selectedDate) {
+      loadSchedules(selectedDate);
+    }
+  });
+</script>
+
+</body>
+</html>
