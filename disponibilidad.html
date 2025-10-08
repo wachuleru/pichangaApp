@@ -7,6 +7,10 @@
   <!-- Agregar Bootstrap desde el CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+    />
   <style>
     /* Colores personalizados para la temática de fútbol */
     .cancha-card {
@@ -22,11 +26,10 @@
     .cancha-card .hora {
       background-color: #066e02;
       border-radius: 4px;
-      margin: 5px;
-      padding: 5px 10px;
+      
     }
     .cancha-card .hora:hover {
-      background-color: #f1f1f1;
+      background-color: #07ad02;
     }
     .disabled {
       cursor: not-allowed;
@@ -49,8 +52,15 @@
   </div>
 
   <!-- Contenedor donde se mostrarán los horarios de las canchas -->
+   <div id="spinner" class="d-flex justify-content-center mt-4 d-none" style="width:100%; height:50vh">
+    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only"></span>
+    </div>
+   </div>
   <div id="schedules-container" class="d-none">
     <h2>Disponibilidad de canchas</h2>
+    
+    <h3 id="fechaCancha"></h3>
     <div id="cancha1" class="cancha-card"></div>
     <div id="cancha2" class="cancha-card"></div>
     <div id="cancha3" class="cancha-card"></div>
@@ -85,6 +95,7 @@
     fetch(`https://apicanchasdeluxe.onrender.com/dia/${date}`)
       .then(response => {
         if (!response.ok) {
+            spinnerOff();
           throw new Error("No se pudo cargar los horarios.");
         }
         return response.json();
@@ -94,22 +105,30 @@
         document.getElementById('schedules-container').classList.remove('d-none');
 
         // Limpiar los contenedores antes de añadir los horarios
-        document.getElementById('cancha1').innerHTML = '<h5>Cancha 1</h5>';
-        document.getElementById('cancha2').innerHTML = '<h5>Cancha 2</h5>';
-        document.getElementById('cancha3').innerHTML = '<h5>Cancha 3</h5>';
-
+        document.getElementById('cancha1').innerHTML = '<div class="row"><div class="col"><h5>Cancha 1</h5></div></div>';
+        document.getElementById('cancha2').innerHTML = '<div class="row"><div class="col"><h5>Cancha 2</h5></div></div>';
+        document.getElementById('cancha3').innerHTML = '<div class="row"><div class="col"><h5>Cancha 3</h5></div></div>';
+        let horarios1='<div class="row">';
+        let horarios2='<div class="row">';
+        let horarios3='<div class="row">';
+        
         data.cancha1.forEach(hora => {
-          document.getElementById('cancha1').innerHTML += `<div class="hora">${hora}</div>`;
+          horarios1 += `<div class="col-3  text-center mb-2"><div class="hora">${hora}`+(hora=='22:00'?`<i class="bi bi-star-fill text-warning ms-3"></i>`:``) +`</div></div>`;
         });
         data.cancha2.forEach(hora => {
-          document.getElementById('cancha2').innerHTML += `<div class="hora">${hora}</div>`;
+          horarios2 += `<div class="col-3  text-center mb-2"><div class="hora">${hora}`+(hora=='22:00'?`<i class="bi bi-star-fill text-warning ms-3"></i>`:``) +`</div></div>`;
         });
         data.cancha3.forEach(hora => {
-          document.getElementById('cancha3').innerHTML += `<div class="hora">${hora}</div>`;
+          horarios3 += `<div class="col-3  text-center mb-2"><div class="hora">${hora}`+(hora=='22:00'?`<i class="bi bi-star-fill text-warning ms-3"></i>`:``) +`</div></div>`;
         });
+        document.getElementById('cancha1').innerHTML +=horarios1;
+        document.getElementById('cancha2').innerHTML +=horarios2;
+        document.getElementById('cancha3').innerHTML +=horarios3;
+        spinnerOff();
       })
       .catch(error => {
         alert("Error al cargar los horarios: " + error.message);
+        spinnerOff();
       });
   }
 
@@ -126,9 +145,19 @@
   document.getElementById('fetch-schedule').addEventListener('click', function() {
     const selectedDate = document.getElementById('date-picker').value;
     if (selectedDate) {
-      loadSchedules(selectedDate);
+        spinnerOn();
+        loadSchedules(selectedDate);
+        
+        document.getElementById('fechaCancha').innerText= selectedDate;
     }
   });
+
+  function spinnerOn(){
+    document.getElementById('spinner').classList.remove('d-none');
+  }
+  function spinnerOff(){
+    document.getElementById('spinner').classList.add('d-none');
+  }
 </script>
 
 </body>
