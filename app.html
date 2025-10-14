@@ -58,7 +58,9 @@
       color: #000;
     }
     .btn-primary-custom:hover {
-      opacity: 0.9;
+      /*opacity: 0.9;*/
+      background-color: #077007;
+      color:#FFF;
     }
     /* Fondo decorativo en "Armar equipos" */
     .bg-soccer {
@@ -728,13 +730,20 @@
           
         
       }
-
+      let filtroJugador="";
       function getJugadoresDisponibles() {
         //calcularPonderado();
         console.log("getJugadoresDisponibles");
         const listado = document.getElementById("jugadoresDisponibles");
         var lista = "";
-        Alljugadores.forEach((e) => {
+        
+        console.log('filtro',filtroJugador)
+        let filtrados=[...Alljugadores]
+        if(filtroJugador.trim()!=""){
+          filtrados=Alljugadores.filter(j=>j.Jugador.toLowerCase().includes(filtroJugador.toLocaleLowerCase()));
+          console.log(filtrados)
+        }
+        filtrados.forEach((e) => {
           let pos= posLabel[e.Especialidad]
           lista +=
             "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-1 '><div class='d-grid gap-1 d-md-block' style='width:100% !important' onclick='toogleJugador(\"" +e.Jugador +"\")' >";
@@ -1327,40 +1336,18 @@
       <!-- Tab Seleccionar jugadores -->
       <div class="tab-pane fade" id="seleccionar" role="tabpanel">
         <h3>Seleccionar jugadores <span class="badge bg-secondary" id="seleccionados"></span></h3>
-        <button class="btn btn-primary-custom mb-3" onclick="armar()" data-bs-target="#equipos" data-bs-toggle="tab" role="tab">Crear equipos</button>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary-custom mb-3" onclick="armar()" data-bs-target="#equipos" data-bs-toggle="tab" role="tab">Crear equipos</button>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Nombre jugador" name="filtro" id="filtro" >
+          </div>
+        </div>
         <div id="jugadoresDisponibles" class="row align-middle">
 
         </div>
-        <!-- <table class="table table-dark table-striped align-middle">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Seleccionar</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Nivel</th>
-              <th scope="col">Posición</th>
-              <th scope="col">Acción</th>
-            </tr>
-          </thead>
-          <tbody id="jugadoresDisponibles">
-            <tr>
-              <td>1</td>
-              <td><input type="checkbox"></td>
-              <td>Juan Pérez</td>
-              <td>7</td>
-              <td>Delantero</td>
-              <td><button class="btn btn-sm btn-primary-custom">Editar</button></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><input type="checkbox"></td>
-              <td>Carlos Díaz</td>
-              <td>5</td>
-              <td>Mediocampista</td>
-              <td><button class="btn btn-sm btn-primary-custom">Editar</button></td>
-            </tr>
-          </tbody>
-        </table> -->
+       
       </div>
 
       <!-- Tab Armar equipos -->
@@ -1411,9 +1398,20 @@
       </div>
 
     </div><!-- /tab-content -->
-
+  
   </div><!-- /container -->
-
+<!-- toast -->
+ <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMessage">
+        
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<!-- toast -->
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -1431,7 +1429,11 @@
             bootstrap.Toast.getOrCreateInstance(toastLiveExample);
         if (nombre.value.trim() == "") {
           console.log("entramos");
-          
+          document.getElementById('toastMessage').innerText="Debe ingresar un nombre al jugador";
+
+          toastBootstrap.show();
+        }else if(Alljugadores.find(j=>j.Jugador.toLocaleLowerCase()==nombre.value.toLocaleLowerCase())){
+          document.getElementById('toastMessage').innerText="El jugador "+nombre.value+" ya ha sido ingresado anteriormente";
 
           toastBootstrap.show();
         }else{
@@ -1448,6 +1450,9 @@
             jugadores.push(np)
             localStorage.setItem("jugadoresSimple", JSON.stringify(Alljugadores));
             getJugadoresDisponibles();
+            nombre.value="";
+            posicion.value="ARQ";
+            puntaje.value=5;
             console.log(Alljugadores)
         }
 
@@ -1575,6 +1580,18 @@
           console.log(Alljugadores)
           getJugadoresDisponibles();
         }
+       
+        const input = document.getElementById('filtro');
+        input.addEventListener('input', e => {
+          const valor = e.target.value.toLowerCase();
+          console.log(valor)
+          filtroJugador=valor;
+          getJugadoresDisponibles();
+         /* const filtrados = jugadores.filter(j => 
+            j.Jugador.toLowerCase().includes(valor)
+          );*/
+         // mostrarJugadores(filtrados);
+        });
     </script>
   
 </body>
